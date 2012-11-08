@@ -17,8 +17,12 @@ Hinweise
 * Getestet mit REDAXO 4.4.1
 * Addon-Ordner lautet: `protect_my_email`
 * Die CSS Methode benötigt diesen Eintrag in Ihrem Stylesheet: `span.hide { display: none; }`
+* Ab Version 1.2.2 wurden die `ins` Tags entfernt, das Sie für eine saubere Validierung nicht mehr nötig sind
 
 Todo's
 ------
 
-* Weitere Verschleierungs-Methoden zur Auswahl
+* Weitere Verschleierungs-Methoden zur Auswahl (CSS CodeDirection, einfaches @ durch [at] ersetzen, etc.)
+* Manueller Converter: Im Backend kann Email-Adresse +  Verschleierungs-Methode ausgewählt werden. Addon spuckt fertigen Code zum rauskopieren aus.
+* HTML5/XHTML Version umschaltbar/autom. erkennen (damit Output auch bei XHTML valide)?
+* CSS Methode standardmäßig abschalten?
