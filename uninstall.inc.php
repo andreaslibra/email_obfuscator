@@ -1,3 +1,3 @@
 <?php
-$REX['ADDON']['install']['protect_my_email'] = 0;
+$REX['ADDON']['install']['email_obfuscator'] = 0;
 ?>

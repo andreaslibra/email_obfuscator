@@ -1,10 +1,10 @@
 <?php
-function rex_protect_my_email($params) {
+function rex_email_obfuscator($params) {
 	global $REX;
 	$content = $params['subject'];
 	
-	$javascriptmethod = $REX['ADDON']['protect_my_email']['javascriptmethod'];
-	$nojavascriptmethod = $REX['ADDON']['protect_my_email']['nojavascriptmethod'];
+	$javascriptmethod = $REX['ADDON']['email_obfuscator']['javascriptmethod'];
+	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['nojavascriptmethod'];
 	
 	if ($javascriptmethod == '0' && $nojavascriptmethod == '0') {
 		// nothing to do
@@ -27,8 +27,8 @@ function encode_email($email, $text = "") {
 		$text = $email;
 	}
 	
-	$javascriptmethod = $REX['ADDON']['protect_my_email']['javascriptmethod'];
-	$nojavascriptmethod = $REX['ADDON']['protect_my_email']['nojavascriptmethod'];
+	$javascriptmethod = $REX['ADDON']['email_obfuscator']['javascriptmethod'];
+	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['nojavascriptmethod'];
 	
 	if ($javascriptmethod == '1') {
 		// javascript version

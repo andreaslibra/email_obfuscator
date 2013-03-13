@@ -1,8 +1,8 @@
 <?php
-$mypage = "protect_my_email";
+$mypage = "email_obfuscator";
 
 $REX['ADDON']['rxid'][$mypage] = '844';
-$REX['ADDON']['name'][$mypage] = 'Protect My Email!';
+$REX['ADDON']['name'][$mypage] = 'Email Obfuscator';
 $REX['ADDON']['page'][$mypage] = $mypage;
 $REX['ADDON']['version'][$mypage] = "1.2.2";
 $REX['ADDON']['author'][$mypage] = "WebDevOne";
@@ -11,12 +11,12 @@ $REX['ADDON']['perm'][$mypage] = $mypage . "[]";
 $REX['PERM'][] = $mypage . "[]";
 
 // --- DYN
-$REX['ADDON']['protect_my_email']['javascriptmethod'] = '1';
-	$REX['ADDON']['protect_my_email']['nojavascriptmethod'] = '1';
+$REX['ADDON']['email_obfuscator']['javascriptmethod'] = '1';
+$REX['ADDON']['email_obfuscator']['nojavascriptmethod'] = '0';
 // --- /DYN
 
 if (!$REX['REDAXO']) {
-	require_once($REX['INCLUDE_PATH'] . '/addons/protect_my_email/functions/functions_protect_my_email.inc.php');
-	rex_register_extension('OUTPUT_FILTER', 'rex_protect_my_email');
+	require_once($REX['INCLUDE_PATH'] . '/addons/email_obfuscator/functions/functions_email_obfuscator.inc.php');
+	rex_register_extension('OUTPUT_FILTER', 'rex_email_obfuscator');
 }
 ?>

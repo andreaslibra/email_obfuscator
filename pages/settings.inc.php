@@ -14,15 +14,15 @@ if (empty($nojavascriptmethod)) {
 }
 
 if ($func == "update") {
-	$REX['ADDON']['protect_my_email']['javascriptmethod'] = $javascriptmethod;
-	$REX['ADDON']['protect_my_email']['nojavascriptmethod'] = $nojavascriptmethod;
+	$REX['ADDON']['email_obfuscator']['javascriptmethod'] = $javascriptmethod;
+	$REX['ADDON']['email_obfuscator']['nojavascriptmethod'] = $nojavascriptmethod;
 	
-	$content = '
-	$REX[\'ADDON\'][\'protect_my_email\'][\'javascriptmethod\'] = \''.$javascriptmethod.'\';
-	$REX[\'ADDON\'][\'protect_my_email\'][\'nojavascriptmethod\'] = \''.$nojavascriptmethod.'\';
-	';
+$content = '
+$REX[\'ADDON\'][\'email_obfuscator\'][\'javascriptmethod\'] = \''.$javascriptmethod.'\';
+$REX[\'ADDON\'][\'email_obfuscator\'][\'nojavascriptmethod\'] = \''.$nojavascriptmethod.'\';
+';
 	
-	$file = $REX['INCLUDE_PATH']."/addons/protect_my_email/config.inc.php";
+	$file = $REX['INCLUDE_PATH']."/addons/email_obfuscator/config.inc.php";
 	rex_replace_dynamic_contents($file, $content);
 	
 	echo rex_info('Einstellungen wurde aktualisiert.');
@@ -59,7 +59,7 @@ Um die Email-Adressen zu sch&uuml;tzen, werden die Techniken "CSS display:none" 
 <div class="rex-area-content">
   <div class="rex-form">	
   <form action="index.php" method="get">
-		<input type="hidden" name="page" value="protect_my_email" />
+		<input type="hidden" name="page" value="email_obfuscator" />
 	    <input type="hidden" name="subpage" value="" />
     	<input type="hidden" name="func" value="update" />
 		<fieldset class="rex-form-col-1">
@@ -68,14 +68,14 @@ Um die Email-Adressen zu sch&uuml;tzen, werden die Techniken "CSS display:none" 
 		</div>
         <div class="rex-form-row">
           <p class="rex-form-checkbox rex-form-label-right">
-            <input class="rex-form-checkbox" type="checkbox" id="javascriptmethod" name="javascriptmethod" value="1" <?php if ($REX['ADDON']['protect_my_email']['javascriptmethod'] == '1') {echo 'checked="checked"';} ?> />
+            <input class="rex-form-checkbox" type="checkbox" id="javascriptmethod" name="javascriptmethod" value="1" <?php if ($REX['ADDON']['email_obfuscator']['javascriptmethod'] == '1') {echo 'checked="checked"';} ?> />
             <label for="javascriptmethod">ROT13 Encryption Methode (JavaScript)</label>
           </p>
         </div>
 
         <div class="rex-form-row">
           <p class="rex-form-checkbox rex-form-label-right">
-            <input class="rex-form-checkbox" type="checkbox" id="nojavascriptmethod" name="nojavascriptmethod" value="1" <?php if ($REX['ADDON']['protect_my_email']['nojavascriptmethod'] == '1') {echo 'checked="checked"';} ?> />
+            <input class="rex-form-checkbox" type="checkbox" id="nojavascriptmethod" name="nojavascriptmethod" value="1" <?php if ($REX['ADDON']['email_obfuscator']['nojavascriptmethod'] == '1') {echo 'checked="checked"';} ?> />
             <label for="nojavascriptmethod">CSS "display:none" Methode (wenn JavaScript deaktiviert)</label>
 			<br /><br />
 			

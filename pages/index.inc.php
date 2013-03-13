@@ -10,7 +10,7 @@ $header = array('<link rel="stylesheet" type="text/css" href="../files/addons/' 
 
 require $REX['INCLUDE_PATH'] . '/layout/top.php';
 
-rex_title($REX['ADDON']['name'][$page] . ' <span style="font-size:14px; color:silver;">' . $REX['ADDON']['version'][$page] . '</span>', $REX['ADDON']['pages'][$page]);
+rex_title($REX['ADDON']['name'][$page] . ' <span style="font-size:14px; color:silver;">' . $REX['ADDON']['version'][$page] . '</span>');
 
 if (!$subpage) {
 	$subpage = 'settings';

@@ -1,28 +1,29 @@
-Protect My Email! Addon für REDAXO 4
-====================================
+Email Obfuscator AddOn für REDAXO 4
+===================================
 
-Durch dieses REDAXO-Addon werden alle Email-Adressen automatisch so verschleiert, dass sie von Spambots nicht mehr erkannt werden können.
+Durch dieses REDAXO-Addon werden alle Email-Adressen automatisch so verschleiert, dass sie von Spambots nicht mehr erkannt werden können. Momentan werden 2 Verschleierungs-Methoden zur Auswahl angeboten. Weitere sind geplant...
 
-Momentan werden 2 Verschleierungs-Methoden zur Auswahl angeboten. Weitere sind geplant...
+Features
+--------
 
-Download/Installation
----------------------
-
-* Download hier unter _Download Packages_: https://github.com/RexDude/protect_my_email/downloads
-* ZIP-Archiv entpacken und in `/redaxo/include/addons` kopieren, im Backend Addon dann installieren und aktivieren
+* Vollautomatisches Verschleiern der Email-Adressen mit bewährten Algorithmen
+* Mehrere Verschleierungs-Methoden zur Auswahl
 
 Hinweise
 --------
 
-* Getestet mit REDAXO 4.4.1
-* Addon-Ordner lautet: `protect_my_email`
+* Getestet mit REDAXO 4.4, 4.5
+* Addon-Ordner lautet: `email_obfuscator`
 * Die CSS Methode benötigt diesen Eintrag in Ihrem Stylesheet: `span.hide { display: none; }`
-* Ab Version 1.2.2 wurden die `ins` Tags entfernt, das Sie für eine saubere Validierung nicht mehr nötig sind
+* AddOn-Name lautete früher `Protect My Email`
 
-Todo's
+Changelog
+---------
+
+siehe [CHANGELOG.md](CHANGELOG.md)
+
+Lizenz
 ------
 
-* Weitere Verschleierungs-Methoden zur Auswahl (CSS CodeDirection, einfaches @ durch [at] ersetzen, etc.)
-* Manueller Converter: Im Backend kann Email-Adresse +  Verschleierungs-Methode ausgewählt werden. Addon spuckt fertigen Code zum rauskopieren aus.
-* HTML5/XHTML Version umschaltbar/autom. erkennen (damit Output auch bei XHTML valide)?
-* CSS Methode standardmäßig abschalten?
+siehe [LICENSE.md](LICENSE.md)
+
