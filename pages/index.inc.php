@@ -4,6 +4,7 @@ $page    = rex_request('page', 'string');
 $subpage = rex_request('subpage', 'string');
 $chapter = rex_request('chapter', 'string');
 $func    = rex_request('func', 'string');
+
 $myroot  = $REX['INCLUDE_PATH'].'/addons/' . $page;
 
 $header = array('<link rel="stylesheet" type="text/css" href="../files/addons/' . $page . '/backend.css" media="screen, projection, print" />');
@@ -16,6 +17,6 @@ if (!$subpage) {
 	$subpage = 'settings';
 }
 
-require $REX['INCLUDE_PATH'] . '/addons/'.$page.'/pages/'.$subpage.'.inc.php'; ?>
+require $REX['INCLUDE_PATH'] . '/addons/'.$page.'/pages/'.$subpage.'.inc.php';
 
-<?php require $REX['INCLUDE_PATH'] . '/layout/bottom.php'; ?>
+require $REX['INCLUDE_PATH'] . '/layout/bottom.php';

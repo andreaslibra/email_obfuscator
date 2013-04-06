@@ -86,4 +86,3 @@ function get_random_val() {
 	return preg_replace('/([ ])/e', 'chr(rand(97,122))', '    ');
 }
 
-?>
