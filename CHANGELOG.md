@@ -1,6 +1,10 @@
 Email Obfuscator - Changelog
 ============================
 
+### Version 1.2.6 - 26. Mai 2013
+
+* Ersetzung sollte jetzt auch bei einem Title-Attribut in Anchor-Tag sowie bei gleichlautendem Email- und Linktext funktionieren (#1)
+
 ### Version 1.2.5 - 13. März 2013
 
 * AddOn Name geändert in `Email Obfuscator`
