@@ -12,10 +12,12 @@ function rex_email_obfuscator($params) {
 	}
 	
 	// wrap anchor tag around email-adresses that don't have already an anchor tag around them
-	$content = preg_replace("#([\s\n>])([a-z0-9\-_.]+)@([a-z0-9\-_.]+)\.([^,< \n\r]+)#i", "$1<a href=\"mailto:$2@$3.$4\">$2@$3.$4</a>", $content); 
+	$content = preg_replace("#([\s\n])([a-z0-9\-_.]+)@([a-z0-9\-_.]+)\.([^,< \n\r]+)#i", "$1<a href=\"mailto:$2@$3.$4\">$2@$3.$4</a>", $content); 
 	
 	// replace all email addresses (now all wrapped in anchor tag) with spam aware version
-	$content = preg_replace("/\<a href\=\"mailto\:(.*?)\"\>(.*?)\<\/a\>/ie", "'' . encode_email('\\1', '\\2') . ''", $content);
+	$content = preg_replace_callback('`\<a([^>]+)href\=\"mailto\:([^">]+)\"([^>]*)\>(.*?)\<\/a\>`ism', function ($m) {
+		return encode_email($m[2], $m[4]);
+    }, $content);
 	
 	// done!
 	return $content;
