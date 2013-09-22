@@ -1,9 +1,9 @@
 Email Obfuscator - Changelog
 ============================
 
-### Version 1.3.0
+### Version 1.3.0 - 22. September 2013
 
-* Fixed #7: Manche nackten Email-Adressen wurden nicht ersetzt insbesondere wenn diese zwischen einem HTML-Tag standen
+* Fixed #7: Manche nackten Email-Adressen wurden nicht ersetzt insbesondere wenn diese zwischen einem HTML-Tag standen (z.B. `<p>foo@bar.de</p>`)
 
 ### Version 1.2.6 - 26. Mai 2013
 
