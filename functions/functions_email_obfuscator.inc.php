@@ -5,8 +5,9 @@ function rex_email_obfuscator($params) {
 	
 	$javascriptmethod = $REX['ADDON']['email_obfuscator']['javascriptmethod'];
 	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['nojavascriptmethod'];
+	$atPos = strpos($content, '@');
 	
-	if ($javascriptmethod == '0' && $nojavascriptmethod == '0') {
+	if ($atPos === false || ($javascriptmethod == '0' && $nojavascriptmethod == '0')) {
 		// nothing to do
 		return $content;
 	}
