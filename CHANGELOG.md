@@ -1,6 +1,10 @@
 Email Obfuscator - Changelog
 ============================
 
+### Version 1.3.0
+
+* Fixed #7: Manche nackten Email-Adressen wurden nicht ersetzt insbesondere wenn diese zwischen einem HTML-Tag standen
+
 ### Version 1.2.6 - 26. Mai 2013
 
 * Ersetzung sollte jetzt auch bei einem Title-Attribut in Anchor-Tag sowie bei gleichlautendem Email- und Linktext funktionieren (#1)
