@@ -118,21 +118,6 @@ div.rex-form div.rex-form-row p input.rex-form-submit {
 </style>
 
 <script type="text/javascript">
-var rewriteBaseMsgShown = false;
-var directoryListingMsgShown = false;
-
-function isCompleteWebsiteUrl() {
-	var pat = /^https?:\/\//i;
-	var serverString = jQuery('#server').val();
-	var slashPosAfterDomain = serverString.indexOf("/", 8); // https:// = 8
-
-	if (pat.test(serverString) && slashPosAfterDomain !== -1 && (serverString.charAt(serverString.length - 1) == '/')) {
-		return true;
-	}
-
-	return false;
-}
-
 jQuery(document).ready(function($) {
 	$( "#nojavascriptmethod").change(function() {
 		if ($(this).is(':checked')) {
