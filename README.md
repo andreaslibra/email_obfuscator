@@ -7,6 +7,7 @@ Features
 --------
 
 * Vollautomatisches Verschleiern der Email-Adressen mit bewährten Algorithmen
+* Sowohl nackte als auch Email-Adressen in einem A-Tag werden berücksichtigt
 * Mehrere Verschleierungs-Methoden zur Auswahl
 
 Hinweise
@@ -27,3 +28,8 @@ Lizenz
 
 siehe [LICENSE.md](LICENSE.md)
 
+Credits
+-------
+
+* Danke an WordPress für die `make_clickable()` Funktion :)
+* Danke an [Xong](https://github.com/xong) für die Hilfe zu RegEx

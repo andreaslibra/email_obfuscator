@@ -13,13 +13,7 @@ function rex_email_obfuscator($params) {
 	}
 	
 	// wrap anchor tag around email-adresses that don't have already an anchor tag around them
-
-	// mark all urls in links with <[#URL#]>
-	$content = preg_replace('~<a([^>]*?)href="([^"]+)"([^>]*)>(.+?)</a>~i', '<a$1href="<[#$2#]>"$3><[#$4#]></a>', $content);
-	// generate e-mail-links
-	$content = preg_replace('~(?!<<\[#)(\b)([\w\d._%+-]+)@([\w\d.-]+)\.(\w+)(\b)(?!#\]>)~i', '$1<a href="mailto:$2@$3.$4">$2@$3.$4</a>$5', $content);
-	// unmark already linked links
-	$content = preg_replace('~<\[#(.+?)#\]>~i', '$1', $content);
+	$content = make_clickable($content);
 	
 	// replace all email addresses (now all wrapped in anchor tag) with spam aware version
 	$content = preg_replace_callback('`\<a([^>]+)href\=\"mailto\:([^">]+)\"([^>]*)\>(.*?)\<\/a\>`ism', function ($m) {
@@ -32,6 +26,7 @@ function rex_email_obfuscator($params) {
 
 function encode_email($email, $text = "") {
 	global $REX;
+
 	if (empty($text)) {
 		$text = $email;
 	}
@@ -50,20 +45,23 @@ function encode_email($email, $text = "") {
 	}
 	
 	// for users who have javascript disabled
-	//$email = substr($email, 0, strpos($email, "\\"));
 	$exploded_email = explode("@", $email);
 	
-	if ($javascriptmethod == '1' && $nojavascriptmethod == '00') {
-		// XHTML
-		//$encoded .= '<ins style="text-decoration:inherit"><noscript><ins style="text-decoration:inherit">Bitte JavaScript aktivieren um die Email-Adresse sichtbar zu machen!</ins></noscript></ins>';
-
+	if ($javascriptmethod == '1' && $nojavascriptmethod == '0') {
+		if (isset($REX['ADDON']['email_obfuscator']['noscript_msg_string_table_key']) && $REX['ADDON']['email_obfuscator']['noscript_msg_string_table_key'] != '' && class_exists('rex_string_table')) {
+			$noscriptMsg = rex_string_table::getString($REX['ADDON']['email_obfuscator']['noscript_msg_string_table_key']);
+		} else {
+			if (isset($REX['ADDON']['email_obfuscator']['noscript_msg'])) {
+				$noscriptMsg = $REX['ADDON']['email_obfuscator']['noscript_msg'];
+			} else {
+				// fallback for older versions
+				$noscriptMsg = 'Bitte JavaScript aktivieren um die Email-Adresse sichtbar zu machen! / Please activate JavaScript to see email address!';
+			}
+		}
 		// HTML5
-		$encoded .= '<noscript><em>&gt;&gt;&gt; Bitte JavaScript aktivieren um die Email-Adresse sichtbar zu machen! &lt;&lt;&lt;</em></noscript>';
+		$encoded .= '<noscript><em>&gt;&gt;&gt; ' . $noscriptMsg . ' &lt;&lt;&lt;</em></noscript>';
 	} else {
 		if ($javascriptmethod == '1' && $nojavascriptmethod == '1') {
-			// XHTML
-			// $encoded .= '<ins style="text-decoration:inherit"><noscript><ins style="text-decoration:inherit">';
-	
 			// HTML5
 			$encoded .= '<noscript>';
 		}
@@ -73,15 +71,11 @@ function encode_email($email, $text = "") {
 		$cryptValues = str_split($string_snippet, 5);
 		
 		if ($nojavascriptmethod == '1') {
-			//$encoded .= "<style type=\"text/css\"> span.hide { display: none; } </style>";
 			$encoded .= "<span class=\"hide\">" . $cryptValues[0] . "</span>" . $exploded_email[0] . "<span class=\"hide\">" . strrev($cryptValues[0]) . "</span>[at]<span class=\"hide\">" . $cryptValues[0] . "</span>" . $exploded_email[1];
 		}
 		
 		
 		if ($javascriptmethod == '1' && $nojavascriptmethod == '1') {
-			// XHTML
-			// $encoded .= "</ins></noscript></ins>";
-	
 			// HTML5
 			$encoded .= '</noscript>';
 		}
@@ -95,3 +89,21 @@ function get_random_val() {
 	return preg_replace('/([ ])/e', 'chr(rand(97,122))', '    ');
 }
 
+// found here: http://zenverse.net/php-function-to-auto-convert-url-into-hyperlink/
+function make_clickable($ret) {
+	$ret = ' ' . $ret;
+	// in testing, using arrays here was found to be faster
+	$ret = preg_replace_callback('#([\s>])([.0-9a-z_+-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})#i', '_make_email_clickable_cb', $ret);
+ 
+	// this one is not in an array because we need it to run last, for cleanup of accidental links within links
+	$ret = preg_replace("#(<a( [^>]+?>|>))<a [^>]+?>([^>]+?)</a></a>#i", "$1$3</a>", $ret);
+	$ret = trim($ret);
+
+	return $ret;
+}
+
+function _make_email_clickable_cb($matches) {
+	$email = $matches[2] . '@' . $matches[3];
+
+	return $matches[1] . "<a href=\"mailto:$email\">$email</a>";
+}

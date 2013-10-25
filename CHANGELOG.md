@@ -1,6 +1,13 @@
 Email Obfuscator - Changelog
 ============================
 
+### Version 1.5.0 - 25. Oktober 2013
+
+* Fixed: Email-Adressen wurden innerhalb Input-Tags fälschlicherweise verschleiert
+* Fixed: EMail-Adressen mit z.B. `.co.uk` Endung wurden nicht korrekt verschleiert
+* Man kann in der `config.inc.php` den Hinweistext ändern, der erscheint wenn JavaScript deaktiviert ist.
+* Man kann in der `config.inc.php` für die NoScript Meldung ein Key für das String Table Addon angeben (so mehrsprachiger Hinweistext möglich).
+
 ### Version 1.3.0 - 22. September 2013
 
 * Fixed #7: Manche nackten Email-Adressen wurden nicht ersetzt insbesondere wenn diese zwischen einem HTML-Tag standen (z.B. `<p>foo@bar.de</p>`)
