@@ -31,6 +31,7 @@ function encode_email($email, $text = "") {
 		$text = $email;
 	}
 	
+	$encoded = '';
 	$javascriptmethod = $REX['ADDON']['email_obfuscator']['javascriptmethod'];
 	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['nojavascriptmethod'];
 	
