@@ -3,7 +3,7 @@ Email Obfuscator AddOn für REDAXO 4
 
 Durch dieses REDAXO-Addon werden alle Email-Adressen automatisch so verschleiert, dass sie von Spambots nicht mehr erkannt werden können. Momentan werden 2 Verschleierungs-Methoden zur Auswahl angeboten. Weitere sind geplant...
 
-Min. PHP Version: 5.3.0
+Min. REDAXO Version: 4.5.0
 
 Features
 --------
@@ -15,7 +15,7 @@ Features
 Hinweise
 --------
 
-* Getestet mit REDAXO 4.4, 4.5
+* Getestet mit REDAXO 4.5
 * Addon-Ordner lautet: `email_obfuscator`
 * Die CSS Methode benötigt diesen Eintrag in Ihrem Stylesheet: `span.hide { display: none; }`
 * AddOn-Name lautete früher `Protect My Email`
