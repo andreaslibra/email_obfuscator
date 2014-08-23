@@ -1,7 +1,7 @@
 Email Obfuscator - Changelog
 ============================
 
-### Version 1.5.1 DEV
+### Version 1.5.1 - 23. August 2014
 
 * Addon ab 1.5.0 nur noch für REDAXO 4.5+
 * Späte OUTPUT_FILTER Registrierung, so dass andere Addons (opf_lang, String Table etc.) vorab Ersetzungen durchführen können, thx@ceekay82
