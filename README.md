@@ -13,7 +13,7 @@ Features
 Hinweise
 --------
 
-* Getestet mit REDAXO 4.5
+* Getestet mit REDAXO 4.5, 4.6
 * Addon-Ordner lautet: `email_obfuscator`
 * Ab Addon Version 1.5.1 nur noch mit REDAXO 4.5+ lauffähig 
 * Die CSS Methode benötigt diesen Eintrag in Ihrem Stylesheet: `span.hide { display: none; }`

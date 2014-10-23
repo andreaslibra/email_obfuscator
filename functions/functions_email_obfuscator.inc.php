@@ -3,11 +3,11 @@ function rex_email_obfuscator($params) {
 	global $REX;
 	$content = $params['subject'];
 	
-	$javascriptmethod = $REX['ADDON']['email_obfuscator']['javascriptmethod'];
-	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['nojavascriptmethod'];
+	$javascriptmethod = $REX['ADDON']['email_obfuscator']['settings']['javascriptmethod'];
+	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['settings']['nojavascriptmethod'];
 	$atPos = strpos($content, '@');
 	
-	if ($atPos === false || ($javascriptmethod == '0' && $nojavascriptmethod == '0')) {
+	if ($atPos === false || (!$javascriptmethod && !$nojavascriptmethod)) {
 		// nothing to do
 		return $content;
 	}
@@ -32,10 +32,10 @@ function encode_email($email, $text = "") {
 	}
 	
 	$encoded = '';
-	$javascriptmethod = $REX['ADDON']['email_obfuscator']['javascriptmethod'];
-	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['nojavascriptmethod'];
+	$javascriptmethod = $REX['ADDON']['email_obfuscator']['settings']['javascriptmethod'];
+	$nojavascriptmethod = $REX['ADDON']['email_obfuscator']['settings']['nojavascriptmethod'];
 	
-	if ($javascriptmethod == '1') {
+	if ($javascriptmethod) {
 		// javascript version
 		$encoded_mail_tag = str_rot13('<a href=\\"mailto:' . $email . '\\">' . $text . '</a>');
 		$encoded = "<script type=\"text/javascript\">";
@@ -48,12 +48,12 @@ function encode_email($email, $text = "") {
 	// for users who have javascript disabled
 	$exploded_email = explode("@", $email);
 	
-	if ($javascriptmethod == '1' && $nojavascriptmethod == '0') {
-		if (isset($REX['ADDON']['email_obfuscator']['noscript_msg_string_table_key']) && $REX['ADDON']['email_obfuscator']['noscript_msg_string_table_key'] != '' && class_exists('rex_string_table')) {
-			$noscriptMsg = rex_string_table::getString($REX['ADDON']['email_obfuscator']['noscript_msg_string_table_key']);
+	if ($javascriptmethod && !$nojavascriptmethod) {
+		if (isset($REX['ADDON']['email_obfuscator']['settings']['noscript_msg_string_table_key']) && $REX['ADDON']['email_obfuscator']['settings']['noscript_msg_string_table_key'] != '' && class_exists('rex_string_table')) {
+			$noscriptMsg = rex_string_table::getString($REX['ADDON']['email_obfuscator']['settings']['noscript_msg_string_table_key']);
 		} else {
-			if (isset($REX['ADDON']['email_obfuscator']['noscript_msg'])) {
-				$noscriptMsg = $REX['ADDON']['email_obfuscator']['noscript_msg'];
+			if (isset($REX['ADDON']['email_obfuscator']['settings']['noscript_msg'])) {
+				$noscriptMsg = $REX['ADDON']['email_obfuscator']['settings']['noscript_msg'];
 			} else {
 				// fallback for older versions
 				$noscriptMsg = 'Bitte JavaScript aktivieren um die Email-Adresse sichtbar zu machen! / Please activate JavaScript to see email address!';
@@ -62,7 +62,7 @@ function encode_email($email, $text = "") {
 		// HTML5
 		$encoded .= '<noscript><em>&gt;&gt;&gt; ' . $noscriptMsg . ' &lt;&lt;&lt;</em></noscript>';
 	} else {
-		if ($javascriptmethod == '1' && $nojavascriptmethod == '1') {
+		if ($javascriptmethod && $nojavascriptmethod) {
 			// HTML5
 			$encoded .= '<noscript>';
 		}
@@ -71,12 +71,12 @@ function encode_email($email, $text = "") {
 		$string_snippet = strtolower(str_rot13(preg_replace("/[^a-zA-Z]/", "", $email)));
 		$cryptValues = str_split($string_snippet, 5);
 		
-		if ($nojavascriptmethod == '1') {
+		if ($nojavascriptmethod) {
 			$encoded .= "<span class=\"hide\">" . $cryptValues[0] . "</span>" . $exploded_email[0] . "<span class=\"hide\">" . strrev($cryptValues[0]) . "</span>[at]<span class=\"hide\">" . $cryptValues[0] . "</span>" . $exploded_email[1];
 		}
 		
 		
-		if ($javascriptmethod == '1' && $nojavascriptmethod == '1') {
+		if ($javascriptmethod && $nojavascriptmethod) {
 			// HTML5
 			$encoded .= '</noscript>';
 		}

@@ -1,33 +1,15 @@
 <?php
+
 $page = rex_request('page', 'string');
 $subpage = rex_request('subpage', 'string');
 $func = rex_request('func', 'string');
-$javascriptmethod = rex_request('javascriptmethod', 'string');
-$nojavascriptmethod = rex_request('nojavascriptmethod', 'string');
 
-if (empty($javascriptmethod)) {
-	$javascriptmethod = '0';
-}
+// save settings
+if ($func == 'update') {
+	$settings = (array) rex_post('settings', 'array', array());
 
-if (empty($nojavascriptmethod)) {
-	$nojavascriptmethod = '0';
-}
-
-if ($func == "update") {
-	$REX['ADDON']['email_obfuscator']['javascriptmethod'] = $javascriptmethod;
-	$REX['ADDON']['email_obfuscator']['nojavascriptmethod'] = $nojavascriptmethod;
-	
-$content = '
-$REX[\'ADDON\'][\'email_obfuscator\'][\'javascriptmethod\'] = \''.$javascriptmethod.'\';
-$REX[\'ADDON\'][\'email_obfuscator\'][\'nojavascriptmethod\'] = \''.$nojavascriptmethod.'\';
-$REX[\'ADDON\'][\'email_obfuscator\'][\'noscript_msg\'] = \''.$REX['ADDON']['email_obfuscator']['noscript_msg'].'\';
-$REX[\'ADDON\'][\'email_obfuscator\'][\'noscript_msg_string_table_key\'] = \''.$REX['ADDON']['email_obfuscator']['noscript_msg_string_table_key'].'\';
-';
-
-	$file = $REX['INCLUDE_PATH']."/addons/email_obfuscator/config.inc.php";
-	rex_replace_dynamic_contents($file, $content);
-	
-	echo rex_info('Einstellungen wurde aktualisiert.');
+	rex_email_obfuscator_utils::replaceSettings($settings);
+	rex_email_obfuscator_utils::updateSettingsFile();
 }
 ?>
 
@@ -58,7 +40,7 @@ Um die Email-Adressen zu sch&uuml;tzen, werden die Techniken "CSS display:none" 
 <h2 class="rex-hl2">Spamschutz w&auml;hlen</h2>
 <div class="rex-area-content">
   <div class="rex-form">	
-  <form action="index.php" method="get">
+  <form action="index.php" method="post">
 		<input type="hidden" name="page" value="email_obfuscator" />
 	    <input type="hidden" name="subpage" value="" />
     	<input type="hidden" name="func" value="update" />
@@ -68,14 +50,16 @@ Um die Email-Adressen zu sch&uuml;tzen, werden die Techniken "CSS display:none" 
 		</div>
         <div class="rex-form-row">
           <p class="rex-form-checkbox rex-form-label-right">
-            <input class="rex-form-checkbox" type="checkbox" id="javascriptmethod" name="javascriptmethod" value="1" <?php if ($REX['ADDON']['email_obfuscator']['javascriptmethod'] == '1') {echo 'checked="checked"';} ?> />
+			<input type="hidden" name="settings[javascriptmethod]" value="0" />
+            <input class="rex-form-checkbox" type="checkbox" id="javascriptmethod" name="settings[javascriptmethod]" value="1" <?php if ($REX['ADDON']['email_obfuscator']['settings']['javascriptmethod']) {echo 'checked="checked"';} ?> />
             <label for="javascriptmethod">JavaScript ROT13 Encryption Methode</label>
           </p>
         </div>
 
         <div class="rex-form-row">
           <p class="rex-form-checkbox rex-form-label-right">
-            <input class="rex-form-checkbox" type="checkbox" id="nojavascriptmethod" name="nojavascriptmethod" value="1" <?php if ($REX['ADDON']['email_obfuscator']['nojavascriptmethod'] == '1') {echo 'checked="checked"';} ?> />
+			<input type="hidden" name="settings[nojavascriptmethod]" value="0" />
+            <input class="rex-form-checkbox" type="checkbox" id="nojavascriptmethod" name="settings[nojavascriptmethod]" value="1" <?php if ($REX['ADDON']['email_obfuscator']['settings']['nojavascriptmethod']) {echo 'checked="checked"';} ?> />
             <label for="nojavascriptmethod">CSS "display:none" Methode</i></label>
           </p>
           <p class="rex-form-label-right"><span id="css-hint">Benötigter Style: <code style="font-size: 12px;">span.hide { display: none; }</code></span></p>
