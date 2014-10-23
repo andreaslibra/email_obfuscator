@@ -3,7 +3,7 @@ Email Obfuscator - Changelog
 
 ### Version 1.6.0 DEV
 
-* Updatefähigkeit verbessert: Einstellungen werden jetzt im Data-Ordner gespeichert
+* Updatefähigkeit für REDAXO 4.6 hergestellt. Einstellungen werden jetzt im Data-Ordner gespeichert.
 
 ### Version 1.5.1 - 23. August 2014
 
